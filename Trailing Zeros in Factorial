@@ -1,0 +1,12 @@
+/*Given an integer n, return the number of trailing zeroes in n!....interview bit*/
+
+
+int Solution::trailingZeroes(int A) {
+    int count=0;
+    int i;
+    for(i=5;A/i>=1;i=i*5)
+    {
+        count +=A/i;
+    }
+    return count;
+}
