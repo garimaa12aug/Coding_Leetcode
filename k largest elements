@@ -1,0 +1,30 @@
+/* geeksforgeeks ...Given an array of N positive integers, print k largest elements from the array.  
+The output elements should be printed in decreasing order.*/
+
+
+#include<bits/stdc++.h>
+
+using namespace std;
+
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        int n,k;
+        cin>>n>>k;
+       vector <int> arr;
+       int i;
+       for(i=0;i<n;i++)
+       {
+           int x;
+           cin>>x;
+           arr.push_back(x);
+       }
+       sort(arr.begin(),arr.end(),greater<int>());
+       for(i=0;i<k;i++)
+       cout<<arr[i]<<" ";
+       cout<<endl;
+    }
+}
