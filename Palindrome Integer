@@ -1,0 +1,29 @@
+/*Determine whether an integer is a palindrome. Do this without extra space
+inetrview bit */
+
+
+
+
+int Solution::isPalindrome(int A) {
+    int x = A;
+    int y=0;
+    int rem;
+    int flag=0;
+    if(x<0)
+    {
+       flag = 1;
+       x = x+2*x;
+    }
+   while(x!=0)
+   {
+    rem = x%10;
+    y = y*10+rem;
+    x = x/10;
+   }
+   if(flag == 1)
+   y= -y;
+    if(y==A)
+    return true;
+    else
+    return false;
+}
