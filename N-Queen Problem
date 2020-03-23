@@ -1,0 +1,74 @@
+#include <iostream>
+#include<bits/stdc++.h>
+using namespace std;
+
+int flag;
+bool is_safe(int row,int column , int result[])
+{
+    int i;
+    for(i=1;i<=row-1;i++)
+    {
+        if(result[i]==column || abs(row-i) == abs(result[i]-column))
+        return 0;
+    }
+    return 1;
+}
+
+void print(int result[],int n)
+{
+    int i;
+    cout<<"[";
+    for(i=1;i<=n;i++)
+    {
+        cout<<result[i]<<" ";
+    }
+    cout<<"] ";
+    flag =1;
+    
+}
+
+bool solve_for(int row , int result[],int n)
+{
+    if(row>n)
+    return 1;
+    int column;
+    bool ans;
+    for(column = 1;column<=n;column++)
+    {
+        if(is_safe(row,column,result))
+        {
+            result[row] = column;
+            //bool ans;
+            ans = solve_for(row+1,result,n);
+            if(ans)
+            print(result,n);
+            
+        }
+        
+    }
+    return 0;
+}
+
+int main() {
+	//code
+	int t;
+	cin>>t;
+	while(t--)
+	{
+	    int n;
+    cin>>n;
+    int result[n];
+    bool ans;
+    ans = solve_for(1,result,n);
+    if(flag)
+    {
+        //do nothing
+    }
+    else
+    cout<<"-1";
+    if(n==2 || n==3)
+    cout<<-1;
+    cout<<endl;
+	}
+	return 0;
+}
