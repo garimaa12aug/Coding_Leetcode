@@ -1,0 +1,43 @@
+#include<bits/stdc++.h>
+using namespace std;
+long long int uglyNumber(int n){
+	
+	int counter2 = 1;
+	int counter3 = 1;
+	int counter5 = 1;
+	long long int table[n + 1] = {0};
+	table[1] = 1;
+	for(int i = 2;i<=n;i++)
+	{
+		long long int ans2 = table[counter2] * 2;
+		long long int ans3 = table[counter3] * 3;
+		long long int ans5 = table[counter5] * 5;
+		long long int final_ans = min(ans2, min(ans3, ans5));
+		table[i] = final_ans;
+		if(final_ans == ans2){
+			counter2++;
+		}
+		if(final_ans == ans3){
+			counter3++;
+		}
+		if(final_ans == ans5){
+			counter5++;
+		}
+	} 
+	return table[n];
+}
+
+int main() 
+{ 
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        long long int n;
+        cin>>n;
+        long long no  = uglyNumber(n);
+        cout<<no<<endl;
+       
+    }
+	return 0; 
+}
