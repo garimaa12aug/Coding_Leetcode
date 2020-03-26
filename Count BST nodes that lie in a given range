@@ -1,0 +1,19 @@
+int getCountOfNode(Node *root, int l, int h)
+{
+  // your code goes here  
+  if(root == NULL)
+  return 0;
+      int count=0;
+      int a=0;
+      int b=0;
+      if(root->data >=l && root->data <=h)
+      count++;
+      if(root->left)
+      a = getCountOfNode(root->left,  l,  h);
+      if(root->right)
+      b = getCountOfNode(root->right,  l,  h);
+      count= count+a+b;
+     
+      return count;
+  
+}
