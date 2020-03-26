@@ -1,0 +1,25 @@
+Node *removeDuplicates(Node *root)
+{
+    
+    Node *p=root;
+    Node *q=NULL;
+    while(p->next != NULL)
+    {
+        q=p;
+        if(p->data == p->next->data)
+        {
+        while(p->next && p->data == p->next->data)
+        {
+           p=p->next; 
+        }
+        q->next = p->next;
+        p->next = NULL;
+        if(q->next)
+        p=q->next;
+        }
+        else
+        p=p->next;
+    }
+    return root;
+ // your code goes here
+}
