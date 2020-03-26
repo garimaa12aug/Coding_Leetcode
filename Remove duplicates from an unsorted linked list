@@ -1,0 +1,16 @@
+#include<bits/stdc++.h>
+Node * removeDuplicates( Node *head) 
+{
+ vector<int>s;
+ Node *p=head;
+ while(p!=NULL)
+ {
+     if(find(s.begin(),s.end(),p->data) == s.end())
+     s.push_back(p->data);
+     p=p->next;
+ }
+ vector<int>::iterator it;
+ for(it=s.begin();it!=s.end();it++)
+ cout<<*it<<" ";
+ return NULL;
+}
