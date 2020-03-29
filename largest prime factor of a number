@@ -1,0 +1,39 @@
+#include <iostream>
+#include<bits/stdc++.h>
+using namespace std;
+
+int prime_is(int n)
+{
+    long long int prime=-1;
+	    while(n%2 == 0)
+	    {
+	        prime = 2;
+	        n=n/2;
+	    }
+	    for(int i=3;i<=sqrt(n);i+=2)
+	    {
+	        while(n%i == 0){
+	            prime = i;
+	            n=n/i;
+	        }
+	        
+	    }
+	    if(n>2)
+	    prime =n;
+	    return prime;
+}
+int main() {
+	//code>
+	int t;
+	cin>>t;
+	while(t--)
+	{
+	    int n;
+	    cin>>n;
+	    int i;
+	    
+	    cout<<prime_is(n)<<endl;
+	    
+	}
+	return 0;
+}
