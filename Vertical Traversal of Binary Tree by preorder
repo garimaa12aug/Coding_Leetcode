@@ -1,0 +1,26 @@
+
+void preorder(Node *root , int hd,map<int,vector<int>>&m)
+{
+    if(root==NULL)
+    return;
+    m[hd].push_back(root->data);
+    if(root->left)
+    preorder(root->left , hd-1,m);
+    if(root->right)
+    preorder(root->right , hd+1,m);
+}
+
+void verticalOrder(Node *root)
+{
+    map<int,vector<int>>m;
+    preorder(root,0,m);
+    map<int,vector<int>>::iterator it;
+   // vector<int>::iterator et;
+    for(it=m.begin();it!=m.end();it++)
+    {
+        for(int i=0;i<it->second.size();i++)
+        cout<<it->second[i]<<" ";
+    }
+    
+    //Your code here
+}
