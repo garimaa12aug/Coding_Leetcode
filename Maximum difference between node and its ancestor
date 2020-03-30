@@ -1,0 +1,28 @@
+/*Given a Binary Tree, you need to find the maximum value which you can get by subtracting the value of node B 
+from the value of node A, where A and B are two nodes of the binary tree and A is an ancestor of B.*/
+
+
+int find(Node *root,int &result)
+{
+    if(!root)
+    return INT_MAX;
+    if(!(root->left) && !(root->right))
+    return root->data;
+    int a,b;
+    if(root->left)
+    a = find(root->left,result);
+    if(root->right)
+    b = find(root->right,result);
+    int val = min(a,b);
+    
+    result = max(result,(root->data)-val);
+    return min(val,root->data);
+}
+
+int maxDiff(Node* root)
+{
+  int result = INT_MIN;
+  find(root,result);
+  return result;
+   
+}
