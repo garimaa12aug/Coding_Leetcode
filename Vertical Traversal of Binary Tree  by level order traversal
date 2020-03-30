@@ -1,0 +1,35 @@
+
+void levelorder(Node *root , int hd,map<int,vector<int>>&m)
+{
+    if(root==NULL)
+    return;
+    queue<pair<Node*,int>>q;
+    q.push(make_pair(root,hd));
+    while(!q.empty())
+    {
+        Node *temp = q.front().first;
+        int x = q.front().second;
+        q.pop();
+        m[x].push_back(temp->data);
+        if(temp->left)
+        q.push(make_pair(temp->left ,x-1));
+        if(temp->right)
+        q.push(make_pair(temp->right,x+1));
+    }
+   
+}
+
+void verticalOrder(Node *root)
+{
+    map<int,vector<int>>m;
+    levelorder(root,0,m);
+    map<int,vector<int>>::iterator it;
+   // vector<int>::iterator et;
+    for(it=m.begin();it!=m.end();it++)
+    {
+        for(int i=0;i<it->second.size();i++)
+        cout<<it->second[i]<<" ";
+    }
+    
+    //Your code here
+}
