@@ -1,0 +1,76 @@
+#include <iostream>
+#include<bits/stdc++.h>
+using namespace std;
+
+int dp[100][100][2];
+int getresults(string s,int i,int j,bool istrue)
+{
+    if(i>j)
+    return 0;
+    if(i==j)
+    {
+        if(istrue)
+        return 'T'==s[i];
+        else
+        return 'F'==s[i];
+    }
+    if(dp[i][j][istrue] != -1)
+    return dp[i][j][istrue];
+    int k;
+    int ans=0;
+    for(k=i+1;k<j;k=k+2)
+    {
+        int lefttrue = getresults(s,i,k-1,true);
+        int leftfalse = getresults(s,i,k-1,false);
+        int righttrue = getresults(s,k+1,j,true);
+        int rightfalse = getresults(s,k+1,j,false);
+        
+        if(s[k] == '^')
+        {
+            if(istrue)
+            ans += lefttrue*rightfalse + leftfalse*righttrue;
+            else
+            ans += lefttrue*righttrue + leftfalse*rightfalse;
+        }
+        else if (s[k] == '|')
+        {
+            if(istrue)
+            ans = ans+lefttrue*righttrue + lefttrue*rightfalse+leftfalse*righttrue;
+            else
+            ans = ans + leftfalse*rightfalse;
+        }
+        else
+        {
+            if(istrue)
+            ans += lefttrue*righttrue;
+            else
+            ans += lefttrue*rightfalse+leftfalse*righttrue+leftfalse*rightfalse;
+        }
+        
+        
+    }
+   
+    return dp[i][j][istrue] =  ans%1003;
+}
+
+int evaluate(string s,int n)
+{
+    memset(dp,-1,sizeof(dp));
+    return getresults(s,0,n-1,true);
+}
+
+int main() {
+	//code
+	int t;
+	cin>>t;
+	while(t--)
+	{
+	    
+	    int n;
+	    cin>>n;
+	    string s;
+	    cin>>s;
+	    cout<<evaluate(s,n)<<endl;
+	}
+	return 0;
+}
