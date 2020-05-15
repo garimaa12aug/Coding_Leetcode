@@ -1,0 +1,80 @@
+/*Given an array of length and an integer . For each window of size , you need to print the sum of its maximum and minimum element. 
+*/
+
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include<bits/stdc++.h>
+
+using namespace std;
+
+
+void minmax_subarray(int arr[],int k,int n)
+{
+    deque<int>greater(k);
+    deque<int>smaller(k);
+    int i;
+    for(i=0;i<k;i++)
+    {
+        while(!greater.empty() && arr[i]>=arr[greater.back()])
+            greater.pop_back();
+        greater.push_back(i);
+    }
+    for(i=0;i<k;i++)
+    {
+        while(!smaller.empty() && arr[i]<arr[smaller.back()])
+            smaller.pop_back();
+        smaller.push_back(i);
+    }
+    for(;i<n;i++)
+    {
+        cout<<arr[greater.front()]+arr[smaller.front()]<<" ";
+        while((!greater.empty()) && (greater.front()<=i-k))
+        greater.pop_front();
+        while ((!greater.empty()) && arr[i] >= arr[greater.back()]) 
+            greater.pop_back(); 
+        greater.push_back(i);
+        while((!smaller.empty()) && (smaller.front()<=i-k))
+        smaller.pop_front();
+        while ((!smaller.empty()) && arr[i] < arr[smaller.back()]) 
+            smaller.pop_back(); 
+        smaller.push_back(i);
+    }
+    cout<<arr[greater.front()]+arr[smaller.front()]<<" ";
+}
+
+int main() {
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */ 
+    int n,k;
+    cin>>n>>k;
+   // vector<priority_queue <int, vector<int>, greater<int> > pq; 
+    int arr[n];
+    int i;
+    for(i=0;i<n;i++)
+    {
+        cin>>arr[i];
+    }
+    minmax_subarray(arr,k,n);
+    set<int>s;
+    /*
+    for(i=0;i<k;i++)
+    s.insert(arr[i]);
+    int pointer =0;
+    set<int>::iterator it,et;
+    it=s.begin();
+    et=s.end();
+    cout<<*it+*et<<" ";
+    for(i=k;i<n;i++)
+    {
+       
+        s.erase(arr[pointer]);
+        pointer++;
+        s.insert(arr[i]);
+        it=s.begin();
+        et=s.end();
+        cout<<*it+*et<<" ";
+    }*/
+    return 0;
+}
